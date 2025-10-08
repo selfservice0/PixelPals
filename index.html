@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>PixelPals Redirect</title>
-    <script>
-      // Forward OAuth tokens from Supabase → Godot listener
-      const params = location.hash.slice(1);
-      if (params && params.includes("access_token")) {
-        window.location.href = "http://localhost:3000/callback?" + params;
-      } else {
-        document.body.innerHTML = "<h3>⚠️ No access_token found.</h3>";
-      }
-    </script>
-  </head>
-  <body>
-    Redirecting to PixelPals app...
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting to PixelPals...</title>
+  <script>
+    // When Supabase redirects here, the URL looks like:
+    // https://selfservice0.github.io/pixelpals/#access_token=...
+    const fragment = window.location.hash.substring(1); // remove #
+    if (fragment) {
+      // Convert #key=value&key=value → ?key=value&key=value
+      const query = '?' + fragment;
+      const redirectUrl = 'http://localhost:3000/callback' + query;
+      window.location.replace(redirectUrl);
+    } else {
+      document.write('❌ No access_token found.');
+    }
+  </script>
+</head>
+<body>
+  <p>Logging you into PixelPals...</p>
+</body>
 </html>
