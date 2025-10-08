@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+      // Convert #fragment into ?query and send to your Godot listener
+      const q = new URLSearchParams(location.hash.slice(1)).toString();
+      location.href = "http://localhost:3000/callback?" + q;
+    </script>
+  </head>
+  <body>
+    Redirecting to app...
+  </body>
+</html>
